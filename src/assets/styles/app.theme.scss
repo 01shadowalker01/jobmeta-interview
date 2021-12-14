@@ -1,0 +1,62 @@
+@import "~@angular/material/theming";
+@include mat-core();
+
+// -----------------------------------------------------------------------------------------------------
+// @ Define a default theme
+// -----------------------------------------------------------------------------------------------------
+$light-primary-text: rgba(0, 0, 0, 0.87);
+$dark-primary-text: #fff;
+
+$hbm-gray: (
+  500: #f0f0f0,
+  contrast: (
+    500: $light-primary-text,
+  ),
+);
+$primary: (
+  500: #23A6F0,
+  contrast: (
+    500: $dark-primary-text,
+  ),
+);
+$accent: (
+  500: #e67e22,
+  contrast: (
+    500: $dark-primary-text,
+  ),
+);
+$warn: (
+  100: rgb(255, 85, 85),
+  300: #ff1111,
+  500: #c72828,
+  contrast: (
+    500: $dark-primary-text,
+  ),
+);
+
+// Define the primary, accent and warn palettes
+$default-theme-primary-palette: mat-palette($primary);
+$default-theme-accent-palette: mat-palette($accent);
+$default-theme-warn-palette: mat-palette($warn);
+$default-theme-background: mat-palette($hbm-gray);
+
+// Create the Material theme object
+$default-theme: mat-light-theme(
+  $default-theme-primary-palette,
+  $default-theme-accent-palette,
+  $default-theme-warn-palette
+);
+
+body.default-theme {
+  // Generate the Angular Material theme
+  @include angular-material-theme($default-theme);
+
+  // components
+
+  $palettes: (
+    primary: $default-theme-primary-palette,
+    accent: $default-theme-accent-palette,
+    warn: $default-theme-warn-palette,
+    background: $default-theme-background,
+  );
+}
