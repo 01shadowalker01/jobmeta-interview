@@ -1,28 +1,25 @@
 @import "~@angular/material/theming";
 @include mat-core();
 
+// components
+@import "./form-field.theme.scss";
+
 // -----------------------------------------------------------------------------------------------------
 // @ Define a default theme
 // -----------------------------------------------------------------------------------------------------
-$light-primary-text: rgba(0, 0, 0, 0.87);
-$dark-primary-text: #fff;
+$light-primary-text: #fff;
+$dark-primary-text: rgba(0, 0, 0, 0.87);
 
-$hbm-gray: (
-  500: #f0f0f0,
+$primary: (
+  500: #23a6f0,
   contrast: (
     500: $light-primary-text,
-  ),
-);
-$primary: (
-  500: #23A6F0,
-  contrast: (
-    500: $dark-primary-text,
   ),
 );
 $accent: (
   500: #e67e22,
   contrast: (
-    500: $dark-primary-text,
+    500: $light-primary-text,
   ),
 );
 $warn: (
@@ -30,6 +27,14 @@ $warn: (
   300: #ff1111,
   500: #c72828,
   contrast: (
+    500: $light-primary-text,
+  ),
+);
+$background: (
+  500: #f9f9f9,
+  700: #e6e6e6,
+  contrast: (
+    100: #737373,
     500: $dark-primary-text,
   ),
 );
@@ -38,7 +43,7 @@ $warn: (
 $default-theme-primary-palette: mat-palette($primary);
 $default-theme-accent-palette: mat-palette($accent);
 $default-theme-warn-palette: mat-palette($warn);
-$default-theme-background: mat-palette($hbm-gray);
+$default-theme-background: mat-palette($background);
 
 // Create the Material theme object
 $default-theme: mat-light-theme(
@@ -51,12 +56,13 @@ body.default-theme {
   // Generate the Angular Material theme
   @include angular-material-theme($default-theme);
 
-  // components
-
   $palettes: (
     primary: $default-theme-primary-palette,
     accent: $default-theme-accent-palette,
     warn: $default-theme-warn-palette,
     background: $default-theme-background,
   );
+
+  // components
+  @include hbm-form-field-theme($palettes);
 }
