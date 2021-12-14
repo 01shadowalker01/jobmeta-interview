@@ -10,7 +10,38 @@ import { MatTableDataSource } from "@angular/material/table";
   ],
 })
 export class ApplicationListComponent implements OnInit {
-  applicationList = new MatTableDataSource();
+  applicationList = [
+    {
+      name: "moz",
+      phone: 12345678,
+      job: "Quality Assurance Officer#6",
+      status: "pending_review",
+    },
+    {
+      name: "moz",
+      phone: 12345678,
+      job: "Quality Assurance Officer#6",
+      status: "pending_review",
+    },
+    {
+      name: "moz",
+      phone: 12345678,
+      job: "Quality Assurance Officer#6",
+      status: "pending_review",
+    },
+    {
+      name: "moz",
+      phone: 12345678,
+      job: "Quality Assurance Officer#6",
+      status: "pending_review",
+    },
+    {
+      name: "moz",
+      phone: 12345678,
+      job: "Quality Assurance Officer#6",
+      status: "pending_review",
+    },
+  ];
   columns = ["name", "phone", "job", "status"];
   foods = [];
 
