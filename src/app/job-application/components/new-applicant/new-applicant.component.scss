@@ -1,3 +1,12 @@
-.content-wrapper {
+form {
+  .new-job-btn {
+    place-self: center start;
+    padding: 10px 20px;
+    min-width: unset;
+    line-height: unset;
+  }
 
+  .submit-button {
+    grid-column: span 2;
+  }
 }

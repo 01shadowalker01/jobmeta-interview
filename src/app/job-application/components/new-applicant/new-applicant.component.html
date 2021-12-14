@@ -1,4 +1,4 @@
-<mat-toolbar>
+<mat-toolbar class="job-header">
   <h1>JobMeta</h1>
 </mat-toolbar>
 
@@ -34,13 +34,19 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <button mat-flat-button type="button" color="primary" routerLink="/new-job">
+    <button
+      mat-flat-button
+      type="button"
+      color="primary"
+      class="new-job-btn"
+      routerLink="/new-job"
+    >
       +
     </button>
     <mat-form-field>
       <mat-label>Input</mat-label>
       <input matInput />
     </mat-form-field>
-    <button mat-flat-button type="submit" color="primary">Submit</button>
+    <button mat-flat-button type="submit" color="primary" class="submit-button">Submit</button>
   </form>
 </article>

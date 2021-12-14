@@ -1,4 +1,4 @@
-<mat-toolbar>
+<mat-toolbar class="job-header">
   <h1>JobMeta</h1>
 </mat-toolbar>
 
@@ -30,14 +30,14 @@
       Choose location from Map
     </button>
 
-    <mat-label>Description</mat-label>
-    <mat-form-field>
+    <p class="span-2">Description</p>
+    <mat-form-field class="span-2">
       <textarea
         matInput
         placeholder="Add job description here please"
       ></textarea>
       <mat-hint>We'll never share your email with anyone else. </mat-hint>
     </mat-form-field>
-    <button mat-flat-button type="submit" color="primary">Submit</button>
+    <button mat-flat-button type="submit" color="primary" class="span-2">Submit</button>
   </form>
 </article>

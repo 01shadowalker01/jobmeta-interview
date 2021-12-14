@@ -1,0 +1,9 @@
+.mat-toolbar {
+  display: flex;
+  justify-content: space-between;
+
+  .search-section .mat-form-field {
+    padding: 0;
+    margin: 0;
+  }
+}
