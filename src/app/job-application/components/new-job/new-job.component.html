@@ -1,1 +1,43 @@
-<p>new-job works!</p>
+<mat-toolbar>
+  <h1>JobMeta</h1>
+</mat-toolbar>
+
+<article class="content-wrapper">
+  <h5>new</h5>
+  <h2>Job</h2>
+  <form (ngSubmit)="onSubmit()">
+    <mat-form-field>
+      <mat-label>Title</mat-label>
+      <input matInput />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Type</mat-label>
+      <input matInput />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Location</mat-label>
+      <input matInput />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Category</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let food of foods" [value]="food">
+          {{ food }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button mat-flat-button type="button" color="primary">
+      Choose location from Map
+    </button>
+
+    <mat-label>Description</mat-label>
+    <mat-form-field>
+      <textarea
+        matInput
+        placeholder="Add job description here please"
+      ></textarea>
+      <mat-hint>We'll never share your email with anyone else. </mat-hint>
+    </mat-form-field>
+    <button mat-flat-button type="submit" color="primary">Submit</button>
+  </form>
+</article>

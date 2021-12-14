@@ -6,7 +6,10 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./new-applicant.component.scss"],
 })
 export class NewApplicantComponent implements OnInit {
+  foods = [];
   constructor() {}
 
   ngOnInit(): void {}
+
+  onSubmit() {}
 }

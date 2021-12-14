@@ -1,1 +1,46 @@
-<p>new-applicant works!</p>
+<mat-toolbar>
+  <h1>JobMeta</h1>
+</mat-toolbar>
+
+<article class="content-wrapper">
+  <h5>new</h5>
+  <h2>Applicant</h2>
+  <form (ngSubmit)="onSubmit()">
+    <mat-form-field>
+      <mat-label>Full Name</mat-label>
+      <input matInput />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input matInput />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Phone</mat-label>
+      <input matInput />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Status</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let food of foods" [value]="food">
+          {{ food }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Job</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let food of foods" [value]="food">
+          {{ food }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button mat-flat-button type="button" color="primary" routerLink="/new-job">
+      +
+    </button>
+    <mat-form-field>
+      <mat-label>Input</mat-label>
+      <input matInput />
+    </mat-form-field>
+    <button mat-flat-button type="submit" color="primary">Submit</button>
+  </form>
+</article>
