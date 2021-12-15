@@ -5,6 +5,7 @@ import { AppComponent } from "./app.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { JobApplicationModule } from "./job-application/job-application.module";
 import { RouterModule } from "@angular/router";
+import { CoreModule } from "./core";
 
 @NgModule({
   declarations: [AppComponent],
@@ -13,6 +14,7 @@ import { RouterModule } from "@angular/router";
     BrowserAnimationsModule,
     RouterModule,
 
+    CoreModule,
     JobApplicationModule,
   ],
   providers: [],
