@@ -21,8 +21,11 @@
     <mat-form-field>
       <mat-label>Category</mat-label>
       <mat-select>
-        <mat-option *ngFor="let food of foods" [value]="food">
-          {{ food }}
+        <mat-option
+          *ngFor="let item of categoryList$ | async"
+          [value]="item.id"
+        >
+          {{ item.category }}
         </mat-option>
       </mat-select>
     </mat-form-field>
@@ -39,6 +42,13 @@
       ></textarea>
       <mat-hint>We'll never share your email with anyone else. </mat-hint>
     </mat-form-field>
-    <button mat-flat-button type="submit" color="primary" class="span-2 submit-button">Submit</button>
+    <button
+      mat-flat-button
+      type="submit"
+      color="primary"
+      class="span-2 submit-button"
+    >
+      Submit
+    </button>
   </form>
 </article>

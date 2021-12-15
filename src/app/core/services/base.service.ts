@@ -2,15 +2,12 @@ import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "src/environments/environment";
 import { BehaviorSubject, Observable } from "rxjs";
-import { tap } from "rxjs/operators";
+import { catchError, tap } from "rxjs/operators";
 import {
-  HttpResponse,
   HttpRequest,
   QueryParam,
-  RequestConfig,
-  RequestOutput,
 } from "../models";
-import { AlertService, AlertType } from "../modules/alert";
+import { AlertService } from "../modules/alert";
 
 @Injectable({
   providedIn: "root",
@@ -31,36 +28,39 @@ export class BaseService {
     let params = "";
     if (queryParams) params = this.serializeQueryParams(queryParams);
 
-    return this.http
-      .get<OutputType>(requestUrl + params)
-      .pipe(tap(() => null, this.handleRequestError.bind(this)));
+    return this.http.get<OutputType>(requestUrl + params).pipe(
+      tap(() => null, this.handleRequestError.bind(this)),
+      catchError(err => this.catchError<OutputType>(err)),
+    );
   }
 
   post$<InputType, OutputType>({
     url,
     body,
     queryParams,
-  }: HttpRequest<InputType>): RequestOutput<OutputType> {
+  }: HttpRequest<InputType>): Observable<OutputType> {
     const requestUrl = this.baseUrl + url;
     let params = "";
     if (queryParams) params = this.serializeQueryParams(queryParams);
 
-    return this.http
-      .post<HttpResponse<OutputType>>(requestUrl + params, body)
-      .pipe(tap(() => null, this.handleRequestError.bind(this)));
+    return this.http.post<OutputType>(requestUrl + params, body).pipe(
+      tap(() => null, this.handleRequestError.bind(this)),
+      catchError(err => this.catchError<OutputType>(err)),
+    );
   }
 
   delete$<InputType, OutputType>({
     url,
     queryParams,
-  }: HttpRequest<InputType>): RequestOutput<OutputType> {
+  }: HttpRequest<InputType>): Observable<OutputType> {
     const requestUrl = this.baseUrl + url;
     let params = "";
     if (queryParams) params = this.serializeQueryParams(queryParams);
 
-    return this.http
-      .delete<HttpResponse<OutputType>>(requestUrl + params)
-      .pipe(tap(() => null, this.handleRequestError.bind(this)));
+    return this.http.delete<OutputType>(requestUrl + params).pipe(
+      tap(() => null, this.handleRequestError.bind(this)),
+      catchError(err => this.catchError<OutputType>(err)),
+    );
   }
 
   postFile$(
@@ -87,14 +87,15 @@ export class BaseService {
     url,
     body,
     queryParams,
-  }: HttpRequest<InputType>): RequestOutput<OutputType> {
+  }: HttpRequest<InputType>): Observable<OutputType> {
     const requestUrl = this.baseUrl + url;
     let params = "";
     if (queryParams) params = this.serializeQueryParams(queryParams);
 
-    return this.http
-      .put<HttpResponse<OutputType>>(requestUrl + params, body)
-      .pipe(tap(null, this.handleRequestError.bind(this)));
+    return this.http.put<OutputType>(requestUrl + params, body).pipe(
+      tap(() => null, this.handleRequestError.bind(this)),
+      catchError(err => this.catchError<OutputType>(err)),
+    );
   }
 
   private serializeQueryParams(params: QueryParam[]): string {
@@ -104,26 +105,15 @@ export class BaseService {
     return "?" + serialized;
   }
 
-  // private showMessage<T>(
-  //   { success, message }: HttpResponse<T>,
-  //   config?: RequestConfig,
-  // ) {
-  //   if (config && !config.showMessage) return;
-  //   if (message) {
-  //     const alertType: AlertType = success ? "SUCCESS" : "DANGER";
-  //     this.alertService.showSnackbar({
-  //       message,
-  //       type: alertType,
-  //     });
-  //   }
-  // }
+  private catchError<T>(error: HttpErrorResponse): Observable<T> {
+    this.handleRequestError(error);
+    return new Observable<T>();
+  }
 
-  private handleRequestError({ error, status }: HttpErrorResponse) {
-    if (status == 400) {
-      this.alertService.showSnackbar({
-        type: "DANGER",
-        message: error.message,
-      });
-    }
+  private handleRequestError({ error }: HttpErrorResponse) {
+    this.alertService.showSnackbar({
+      type: "DANGER",
+      message: error.message,
+    });
   }
 }
