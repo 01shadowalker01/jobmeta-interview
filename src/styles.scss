@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import "assets/styles/fonts.scss";
 @import "assets/styles/app.theme.scss";
+@import "./app/core/modules/alert/shared/styles/alert.scss";
 
 html,
 body {
