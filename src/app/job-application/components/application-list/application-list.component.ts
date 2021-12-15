@@ -1,4 +1,9 @@
 import { Component, OnInit } from "@angular/core";
+import { Observable } from "rxjs";
+import { map } from "rxjs/operators";
+import { RequestOutput } from "src/app/core/models";
+import { JobApplicationService } from "../../shared/job-application.service";
+import { Application } from "../../shared/models";
 
 @Component({
   selector: "hbm-application-list",
@@ -9,42 +14,17 @@ import { Component, OnInit } from "@angular/core";
   ],
 })
 export class ApplicationListComponent implements OnInit {
-  applicationList = [
-    {
-      name: "moz",
-      phone: 12345678,
-      job: "Quality Assurance Officer#6",
-      status: "pending_review",
-    },
-    {
-      name: "moz",
-      phone: 12345678,
-      job: "Quality Assurance Officer#6",
-      status: "pending_review",
-    },
-    {
-      name: "moz",
-      phone: 12345678,
-      job: "Quality Assurance Officer#6",
-      status: "pending_review",
-    },
-    {
-      name: "moz",
-      phone: 12345678,
-      job: "Quality Assurance Officer#6",
-      status: "pending_review",
-    },
-    {
-      name: "moz",
-      phone: 12345678,
-      job: "Quality Assurance Officer#6",
-      status: "pending_review",
-    },
-  ];
+  applicationList$!: RequestOutput<Application>;
   columns = ["name", "phone", "job", "status"];
   foods = [];
 
-  constructor() {}
+  constructor(private jobApplicationSrvc: JobApplicationService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getApplicationList();
+  }
+
+  getApplicationList() {
+    this.applicationList$ = this.jobApplicationSrvc.getApplicationList();
+  }
 }

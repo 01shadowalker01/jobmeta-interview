@@ -8,19 +8,15 @@ import {
   HttpRequest,
   QueryParam,
   RequestConfig,
+  RequestOutput,
 } from "../models";
 import { AlertService, AlertType } from "../modules/alert";
-
-type RequestOutput<T> = Observable<HttpResponse<T>>;
 
 @Injectable({
   providedIn: "root",
 })
 export class BaseService {
-  constructor(
-    private http: HttpClient,
-    private alertService: AlertService,
-  ) {}
+  constructor(private http: HttpClient, private alertService: AlertService) {}
 
   public get baseUrl(): string {
     return environment.baseUrl;
@@ -30,19 +26,14 @@ export class BaseService {
     url,
     queryParams,
     config,
-  }: HttpRequest<InputType>): RequestOutput<OutputType> {
+  }: HttpRequest<InputType>): Observable<OutputType> {
     const requestUrl = this.baseUrl + url;
     let params = "";
     if (queryParams) params = this.serializeQueryParams(queryParams);
 
     return this.http
-      .get<HttpResponse<OutputType>>(requestUrl + params)
-      .pipe(
-        tap(
-          resp => this.showMessage(resp, config),
-          this.handleRequestError.bind(this),
-        ),
-      );
+      .get<OutputType>(requestUrl + params)
+      .pipe(tap(() => null, this.handleRequestError.bind(this)));
   }
 
   post$<InputType, OutputType>({
@@ -56,9 +47,7 @@ export class BaseService {
 
     return this.http
       .post<HttpResponse<OutputType>>(requestUrl + params, body)
-      .pipe(
-        tap(this.showMessage.bind(this), this.handleRequestError.bind(this)),
-      );
+      .pipe(tap(() => null, this.handleRequestError.bind(this)));
   }
 
   delete$<InputType, OutputType>({
@@ -71,9 +60,7 @@ export class BaseService {
 
     return this.http
       .delete<HttpResponse<OutputType>>(requestUrl + params)
-      .pipe(
-        tap(this.showMessage.bind(this), this.handleRequestError.bind(this)),
-      );
+      .pipe(tap(() => null, this.handleRequestError.bind(this)));
   }
 
   postFile$(
@@ -91,7 +78,6 @@ export class BaseService {
       },
       error => {
         result.next(error);
-        this.showMessage.bind(this);
       },
     );
     return result;
@@ -108,9 +94,7 @@ export class BaseService {
 
     return this.http
       .put<HttpResponse<OutputType>>(requestUrl + params, body)
-      .pipe(
-        tap(this.showMessage.bind(this), this.handleRequestError.bind(this)),
-      );
+      .pipe(tap(null, this.handleRequestError.bind(this)));
   }
 
   private serializeQueryParams(params: QueryParam[]): string {
@@ -120,19 +104,19 @@ export class BaseService {
     return "?" + serialized;
   }
 
-  private showMessage<T>(
-    { success, message }: HttpResponse<T>,
-    config?: RequestConfig,
-  ) {
-    if (config && !config.showMessage) return;
-    if (message) {
-      const alertType: AlertType = success ? "SUCCESS" : "DANGER";
-      this.alertService.showSnackbar({
-        message,
-        type: alertType,
-      });
-    }
-  }
+  // private showMessage<T>(
+  //   { success, message }: HttpResponse<T>,
+  //   config?: RequestConfig,
+  // ) {
+  //   if (config && !config.showMessage) return;
+  //   if (message) {
+  //     const alertType: AlertType = success ? "SUCCESS" : "DANGER";
+  //     this.alertService.showSnackbar({
+  //       message,
+  //       type: alertType,
+  //     });
+  //   }
+  // }
 
   private handleRequestError({ error, status }: HttpErrorResponse) {
     if (status == 400) {

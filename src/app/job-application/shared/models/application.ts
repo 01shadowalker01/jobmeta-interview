@@ -1,3 +1,5 @@
+import { Job } from "./job";
+
 export interface Application {
   id: number;
   created_at: any;
@@ -6,4 +8,5 @@ export interface Application {
   phone: string;
   email: string;
   status: string;
+  _job: Job;
 }
