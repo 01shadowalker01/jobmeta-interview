@@ -1,0 +1,25 @@
+@mixin hbm-form-field-theme($palettes) {
+  $background: map-get($palettes, background);
+  $text-color: map-get($background, contrast);
+
+  .mat-form-field {
+    &-flex {
+      background-color: map-get($background, 500);
+      border: 1px solid map-get($background, 700);
+      box-sizing: border-box;
+      border-radius: 5px;
+      padding: 10px 20px;
+
+      .mat-form-field-label {
+        color: map-get($text-color, 100);
+      }
+    }
+
+    &-infix {
+      border-top-width: 0;
+    }
+    &-underline {
+      display: none;
+    }
+  }
+}

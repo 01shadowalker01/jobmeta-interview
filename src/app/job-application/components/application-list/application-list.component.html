@@ -1,11 +1,11 @@
 <mat-toolbar class="job-header">
   <h1>JobMeta</h1>
   <section class="search-section">
-    <mat-form-field>
+    <mat-form-field class="search-input">
       <mat-label>Search</mat-label>
       <input matInput />
     </mat-form-field>
-    <mat-form-field>
+    <mat-form-field class="job-list">
       <mat-label>Job</mat-label>
       <mat-select>
         <mat-option *ngFor="let food of foods" [value]="food">
@@ -21,23 +21,37 @@
   </button>
 </mat-toolbar>
 
-<table mat-table [dataSource]="applicationList">
-  <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef><strong>Name(email)</strong></th>
-    <td mat-cell *matCellDef="let row"></td>
-  </ng-container>
-  <ng-container matColumnDef="phone">
-    <th mat-header-cell *matHeaderCellDef><strong>Phone</strong></th>
-    <td mat-cell *matCellDef="let row"></td>
-  </ng-container>
-  <ng-container matColumnDef="job">
-    <th mat-header-cell *matHeaderCellDef><strong>Job</strong></th>
-    <td mat-cell *matCellDef="let row"></td>
-  </ng-container>
-  <ng-container matColumnDef="status">
-    <th mat-header-cell *matHeaderCellDef><strong>Status</strong></th>
-    <td mat-cell *matCellDef="let row"></td>
-  </ng-container>
-  <tr mat-header-row *matHeaderRowDef="columns"></tr>
-  <tr mat-row *matRowDef="let row; columns: columns"></tr>
-</table>
+<article class="content-wrapper">
+  <table mat-table [dataSource]="applicationList">
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef><strong>Name(email)</strong></th>
+      <td mat-cell *matCellDef="let row">
+        {{ row.name }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="phone">
+      <th mat-header-cell *matHeaderCellDef><strong>Phone</strong></th>
+      <td mat-cell *matCellDef="let row">{{ row.phone }}</td>
+    </ng-container>
+    <ng-container matColumnDef="job">
+      <th mat-header-cell *matHeaderCellDef><strong>Job</strong></th>
+      <td mat-cell *matCellDef="let row">
+        {{ row.job }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef><strong>Status</strong></th>
+      <td mat-cell *matCellDef="let row">
+        {{ row.status }}
+        <button mat-flat-button color="primary">
+          Remove
+        </button>
+        <button mat-flat-button color="primary">
+          Download
+        </button>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="columns"></tr>
+    <tr mat-row *matRowDef="let row; columns: columns"></tr>
+  </table>
+</article>

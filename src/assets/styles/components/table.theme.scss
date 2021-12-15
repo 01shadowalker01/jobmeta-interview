@@ -1,0 +1,25 @@
+@mixin hbm-table-theme($palettes) {
+  $background: map-get($palettes, background);
+  $text-color: map-get($background, contrast);
+
+  .mat-table {
+    border-collapse: separate;
+    border-spacing: 0 2.5vh;
+
+    .mat-header-row,
+    .mat-row {
+      background-color: map-get($background, 500);
+    }
+
+    .mat-header-cell,
+    .mat-cell {
+      border-bottom: 0;
+      padding: 0 24px;
+      font-size: 1em;
+    }
+
+    .mat-header-cell {
+      color: map-get($text-color, 500);
+    }
+  }
+}
