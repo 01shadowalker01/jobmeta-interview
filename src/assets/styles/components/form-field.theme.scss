@@ -18,6 +18,11 @@
     &-infix {
       border-top-width: 0;
     }
+    &-prefix {
+      align-self: center;
+      margin-right: 8px;
+      color: map-get($text-color, 100);
+    }
     &-underline {
       display: none;
     }

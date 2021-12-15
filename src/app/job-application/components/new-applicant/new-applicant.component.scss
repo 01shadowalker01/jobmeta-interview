@@ -4,9 +4,15 @@ form {
     padding: 10px 20px;
     min-width: unset;
     line-height: unset;
+    margin-bottom: 1.25em;
   }
 
-  .submit-button {
-    grid-column: span 2;
+  .uploader {
+    margin: 4vh auto 0;
+    width: 80%;
+
+    ::ng-deep .mat-form-field-flex {
+      padding: 16px;
+    }
   }
 }
