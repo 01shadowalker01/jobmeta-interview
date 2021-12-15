@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 @Component({
   selector: "hbm-new-applicant",
@@ -9,10 +10,25 @@ import { Component, OnInit } from "@angular/core";
   ],
 })
 export class NewApplicantComponent implements OnInit {
+  form = new FormGroup({});
   foods = [];
-  constructor() {}
 
-  ngOnInit(): void {}
+  constructor(private formBuilder: FormBuilder) {}
+
+  ngOnInit(): void {
+    this.initFormConfig();
+  }
+
+  initFormConfig() {
+    this.form = this.formBuilder.group({
+      name: [null, Validators.required],
+      phone: [null, Validators.required],
+      email: [null, Validators.required],
+      status: [null, Validators.required],
+      job_id: [null, Validators.required],
+      resume: [null, Validators.required],
+    });
+  }
 
   onSubmit() {}
 }

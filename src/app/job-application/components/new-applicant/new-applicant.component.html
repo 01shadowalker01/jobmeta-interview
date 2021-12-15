@@ -5,22 +5,22 @@
 <article class="content-wrapper">
   <h5>new</h5>
   <h2>Applicant</h2>
-  <form (ngSubmit)="onSubmit()">
+  <form (ngSubmit)="onSubmit()" [formGroup]="form">
     <mat-form-field>
       <mat-label>Full Name</mat-label>
-      <input matInput />
+      <input matInput formControlName="name" />
     </mat-form-field>
     <mat-form-field>
       <mat-label>Email</mat-label>
-      <input matInput />
+      <input matInput formControlName="email" />
     </mat-form-field>
     <mat-form-field>
       <mat-label>Phone</mat-label>
-      <input matInput />
+      <input matInput formControlName="phone" />
     </mat-form-field>
     <mat-form-field>
       <mat-label>Status</mat-label>
-      <mat-select>
+      <mat-select formControlName="status">
         <mat-option *ngFor="let food of foods" [value]="food">
           {{ food }}
         </mat-option>
@@ -28,7 +28,7 @@
     </mat-form-field>
     <mat-form-field>
       <mat-label>Job</mat-label>
-      <mat-select>
+      <mat-select formControlName="job_id">
         <mat-option *ngFor="let food of foods" [value]="food">
           {{ food }}
         </mat-option>
@@ -43,10 +43,14 @@
     >
       +
     </button>
-    <mat-form-field>
-      <mat-label>Input</mat-label>
-      <input matInput />
-    </mat-form-field>
-    <button mat-flat-button type="submit" color="primary" class="submit-button">Submit</button>
+    <shw-file-uploader class="uploader span-2"></shw-file-uploader>
+    <button
+      mat-flat-button
+      type="submit"
+      color="primary"
+      class="submit-button span-2"
+    >
+      Submit
+    </button>
   </form>
 </article>
