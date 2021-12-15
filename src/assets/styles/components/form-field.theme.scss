@@ -18,6 +18,11 @@
     &-infix {
       border-top-width: 0;
     }
+
+    // &-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float.mat-form-field-label {
+    //   transform: translateY(-1em) scale(0.75) perspective(100px) translateZ(0.001px) !important;
+    // }
+
     &-prefix {
       align-self: center;
       margin-right: 8px;
