@@ -1,0 +1,37 @@
+@mixin hbm-custom-paginatior($palettes) {
+  $background: map-get($palettes, background);
+  $primary: map-get($palettes, primary);
+
+  .hbm-custom-paginator {
+    .mat-button-base {
+      border: 1px solid map-get($background, 800);
+      color: map-get($primary, 500);
+      padding: 12px 16px;
+      min-width: 0;
+
+      &.is-active {
+        background-color: map-get($primary, 500);
+        color: white;
+      }
+
+      &.mat-button-disabled {
+        background-color: map-get($background, 600);
+        color: #bdbdbd;
+      }
+
+      &:first-of-type {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+
+      &:last-of-type {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+
+      &:not(:first-of-type):not(:last-of-type) {
+        border-radius: 0;
+      }
+    }
+  }
+}

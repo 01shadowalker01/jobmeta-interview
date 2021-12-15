@@ -23,35 +23,40 @@
 
 <article class="content-wrapper">
   <ng-container *ngIf="{ applicationList: applicationList$ | async } as obs">
-    <table
-      mat-table
-      *ngIf="obs.applicationList"
-      [dataSource]="obs.applicationList.items"
-    >
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef><strong>Name(email)</strong></th>
-        <td mat-cell *matCellDef="let row">{{ row.name }} ({{ row.email }})</td>
-      </ng-container>
-      <ng-container matColumnDef="phone">
-        <th mat-header-cell *matHeaderCellDef><strong>Phone</strong></th>
-        <td mat-cell *matCellDef="let row">{{ row.phone }}</td>
-      </ng-container>
-      <ng-container matColumnDef="job">
-        <th mat-header-cell *matHeaderCellDef><strong>Job</strong></th>
-        <td mat-cell *matCellDef="let row">
-          {{ row._job.title }}
-        </td>
-      </ng-container>
-      <ng-container matColumnDef="status">
-        <th mat-header-cell *matHeaderCellDef><strong>Status</strong></th>
-        <td mat-cell *matCellDef="let row">
-          {{ row.status }}
-          <button mat-flat-button color="primary">Remove</button>
-          <button mat-flat-button color="primary">Download</button>
-        </td>
-      </ng-container>
-      <tr mat-header-row *matHeaderRowDef="columns"></tr>
-      <tr mat-row *matRowDef="let row; columns: columns"></tr>
-    </table>
+    <ng-container *ngIf="obs.applicationList">
+      <table mat-table [dataSource]="obs.applicationList.items">
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>
+            <strong>Name(email)</strong>
+          </th>
+          <td mat-cell *matCellDef="let row">
+            {{ row.name }} ({{ row.email }})
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="phone">
+          <th mat-header-cell *matHeaderCellDef><strong>Phone</strong></th>
+          <td mat-cell *matCellDef="let row">{{ row.phone }}</td>
+        </ng-container>
+        <ng-container matColumnDef="job">
+          <th mat-header-cell *matHeaderCellDef><strong>Job</strong></th>
+          <td mat-cell *matCellDef="let row">
+            {{ row._job.title }}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef><strong>Status</strong></th>
+          <td mat-cell *matCellDef="let row">
+            {{ row.status }}
+            <button mat-flat-button color="primary">Remove</button>
+            <button mat-flat-button color="primary">Download</button>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns"></tr>
+      </table>
+      <hbm-custom-paginator
+        [length]="obs.applicationList.itemsReceived"
+      ></hbm-custom-paginator>
+    </ng-container>
   </ng-container>
 </article>
