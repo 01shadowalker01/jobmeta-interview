@@ -1,0 +1,19 @@
+<section class="hbm-custom-paginator">
+  <button
+    mat-button
+    *ngIf="hasFirstButton"
+    [disabled]="currentPage === 1"
+    (click)="onPageChange(1)"
+  >
+    First
+  </button>
+  <button
+    mat-button
+    *ngFor="let page of pages"
+    [class.is-active]="page === currentPage"
+    (click)="onPageChange(page)"
+  >
+    {{ page }}
+  </button>
+  <button mat-button (click)="onPageChange(currentPage + 1)">Next</button>
+</section>

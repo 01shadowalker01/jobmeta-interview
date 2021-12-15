@@ -2,8 +2,9 @@
 @include mat-core();
 
 // components
-@import "./components/form-field.theme.scss";
-@import "./components/table.theme.scss";
+@import "./components/form-field.theme";
+@import "./components/table.theme";
+@import "../../app/shared/custom-paginator/custom-paginator.component";
 
 @mixin hbm-button-theme {
   .mat-button-base {
@@ -39,7 +40,9 @@ $warn: (
 );
 $background: (
   500: #f9f9f9,
-  700: #e6e6e6,
+  600: #f3f3f3,
+  800: #e8e8e8,
+  900: #e6e6e6,
   contrast: (
     100: #737373,
     500: $dark-primary-text,
@@ -74,4 +77,5 @@ body.default-theme {
   @include hbm-form-field-theme($palettes);
   @include hbm-table-theme($palettes);
   @include hbm-button-theme();
+  @include hbm-custom-paginatior($palettes);
 }
