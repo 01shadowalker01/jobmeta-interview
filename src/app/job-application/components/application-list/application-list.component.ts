@@ -1,12 +1,11 @@
 import { Component, OnInit } from "@angular/core";
-import { MatTableDataSource } from "@angular/material/table";
 
 @Component({
   selector: "hbm-application-list",
   templateUrl: "./application-list.component.html",
   styleUrls: [
-    "./application-list.component.scss",
     "../../shared/shared-styles.scss",
+    "./application-list.component.scss",
   ],
 })
 export class ApplicationListComponent implements OnInit {
