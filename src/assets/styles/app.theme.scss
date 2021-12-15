@@ -5,6 +5,12 @@
 @import "./components/form-field.theme.scss";
 @import "./components/table.theme.scss";
 
+@mixin hbm-button-theme {
+  .mat-button-base {
+    border-radius: 5px;
+  }
+}
+
 // -----------------------------------------------------------------------------------------------------
 // @ Define a default theme
 // -----------------------------------------------------------------------------------------------------
@@ -67,4 +73,5 @@ body.default-theme {
   // components
   @include hbm-form-field-theme($palettes);
   @include hbm-table-theme($palettes);
+  @include hbm-button-theme();
 }

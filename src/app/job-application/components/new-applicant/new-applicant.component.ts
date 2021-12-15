@@ -1,4 +1,9 @@
 import { Component, OnInit } from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Observable } from "rxjs";
+import { map } from "rxjs/operators";
+import { JobApplicationService } from "../../shared/job-application.service";
+import { Job } from "../../shared/models";
 
 @Component({
   selector: "hbm-new-applicant",
@@ -9,10 +14,42 @@ import { Component, OnInit } from "@angular/core";
   ],
 })
 export class NewApplicantComponent implements OnInit {
-  foods = [];
-  constructor() {}
+  jobList$!: Observable<Job[]>;
+  form = new FormGroup({});
+  statusList = ["pending_review"];
 
-  ngOnInit(): void {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private jobApplicationSrvc: JobApplicationService,
+  ) {}
 
-  onSubmit() {}
+  ngOnInit(): void {
+    this.initFormConfig();
+    this.getJobList();
+  }
+
+  initFormConfig() {
+    this.form = this.formBuilder.group({
+      name: [null, Validators.required],
+      phone: [null, Validators.required],
+      email: [null, Validators.required],
+      status: [null, Validators.required],
+      job_id: [null, Validators.required],
+      resume: [null],
+    });
+  }
+
+  getJobList() {
+    this.jobList$ = this.jobApplicationSrvc
+      .getJobList()
+      .pipe(map(resp => resp.items));
+  }
+
+  onSubmit() {
+    // if (this.form.valid) {
+      this.jobApplicationSrvc
+        .addApplicant(this.form.value)
+        .subscribe(console.log);
+    }
+  // }
 }

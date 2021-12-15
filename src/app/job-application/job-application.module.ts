@@ -12,6 +12,8 @@ import { ApplicationListComponent } from "./components/application-list/applicat
 import { NewApplicantComponent } from "./components/new-applicant/new-applicant.component";
 import { NewJobComponent } from "./components/new-job/new-job.component";
 import { JobApplicationRoutingModule } from "./job-appilication.routing";
+import { ReactiveFormsModule } from "@angular/forms";
+import { SharedModule } from "../shared";
 
 @NgModule({
   declarations: [
@@ -21,6 +23,7 @@ import { JobApplicationRoutingModule } from "./job-appilication.routing";
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     MatToolbarModule,
     MatTableModule,
     MatFormFieldModule,
@@ -30,6 +33,7 @@ import { JobApplicationRoutingModule } from "./job-appilication.routing";
     MatIconModule,
 
     JobApplicationRoutingModule,
+    SharedModule,
   ],
 })
 export class JobApplicationModule {}
