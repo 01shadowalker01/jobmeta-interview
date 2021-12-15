@@ -1,0 +1,16 @@
+<div class="uploader-wrapper">
+  <label for="fileUploader" (click)="fileUploader.click()">
+    <mat-form-field>
+      <mat-label>Choose File</mat-label>
+      <input matInput disabled />
+      <mat-icon matPrefix>attachment</mat-icon>
+    </mat-form-field>
+  </label>
+  <input
+    #fileUploader
+    type="file"
+    name="fileUploader"
+    (change)="onFileChange(fileUploader)"
+  />
+  <mat-progress-bar *ngIf="isUploading" mode="indeterminate"></mat-progress-bar>
+</div>

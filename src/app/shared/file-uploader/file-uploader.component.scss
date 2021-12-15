@@ -1,0 +1,17 @@
+.uploader-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: 8px;
+  margin-bottom: 2vh;
+
+  label,
+  mat-form-field {
+    width: inherit;
+  }
+
+  input[type="file"] {
+    display: none;
+  }
+}
